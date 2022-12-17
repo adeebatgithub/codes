@@ -14,6 +14,7 @@ pip install -r requirements.txt
 echo "[*] for tool"
 cd /sdcard/python/tool
 pip install -r requirements.txt
+pip install pytube
 
 echo "----------------------------------"
 echo "[*] changing motd"
