@@ -1,32 +1,88 @@
+#!/bin/bash
 
-echo "[*] upgrading...."
-apt upgrade -y
-echo "[*] updating...."
+red="\033[1;31m"
+green="\033[1;32m"
+yellow="\033[1;33m"
+noc="\033[0m"
+
+banner () {
+    clear
+    printf "${yellow}--------------------------------------------------------${noc}\n"
+    printf "${red}                   SETTING TERMUX ${noc}\n"
+    printf "${yellow}--------------------------------------------------------${noc}\n"
+    sleep 2
+}
+
+banner
+echo ""
+echo ""
+printf "${yellow}---------------------------------${noc}\n"
+printf "${green}[*] upgrading....${noc}\n"
+printf "${yellow}---------------------------------${noc}\n"
+sleep 2
 apt update -y
+printf "${yellow}---------------------------------${noc}\n"
+printf "${green}[*] updating....${noc}\n"
+printf "${yellow}---------------------------------${noc}\n"
+sleep 2
+apt upgrade -y
 
-echo "---------------------------------"
-echo "[+] installing python"
-apt install python
-echo "[+] installing required libraries..."
-echo "[*] for bot"
+printf "${yellow}---------------------------------${noc}\n"
+printf "${green}[+] installing python${noc}\n"
+printf "${yellow}---------------------------------${noc}\n"
+sleep 2
+apt install python -y
+printf "${yellow}---------------------------------${noc}\n"
+printf "${green}[+] installing required libraries...${noc}\n"
+printf "${yellow}---------------------------------${noc}\n"
+sleep 1
+echo ""
+printf "${green}--> [*] for >> bot${noc}\n"
+printf "${yellow}---------------------------------${noc}\n"
+sleep 1
 cd /sdcard/python/bot
 pip install -r requirements.txt
-echo "[*] for tool"
+pip install setuptools
+printf "${green} [*] Done ${noc}\n"
+echo ""
+printf "${green}--> [*] for >> tool${noc}\n"
+printf "${yellow}---------------------------------${noc}\n"
+sleep 1
 cd /sdcard/python/tool
 pip install -r requirements.txt
 pip install pytube
-
-echo "----------------------------------"
-echo "[*] changing motd"
-cp /sdcard/python/motd $PREFIX/etc/motd
-
-echo "---------------------------------"
-echo "[+] setting commands Bot,Tool"
+printf "${green} [*] Done ${noc}\n"
+echo ""
+printf "${yellow}----------------------------------${noc}\n"
+printf "${red}[*] changing motd${noc}\n"
+printf "${yellow}---------------------------------${noc}\n"
+sleep 1
+cp /sdcard/python/codes/motd $PREFIX/etc/motd
+printf "${green} [*] Done ${noc}"
+echo ""
+printf "${yellow}---------------------------------${noc}\n"
+printf "${green}[+] setting commands${noc}\n"
+printf "${yellow}---------------------------------${noc}\n"
+sleep 1
+echo ""
+printf "${green}--> for >> Bot${noc}\n"
+sleep 1
 echo "python /sdcard/python/bot/bot.py" > $PREFIX/bin/Bot
 chmod +x $PREFIX/bin/Bot
+printf "${green} [*] command creat : Bot ${noc}"
+echo ""
+printf "${green}--> for >> Tool${noc}\n"
+sleep 1
 echo "python /sdcard/python/tool/tool.py" > $PREFIX/bin/Tool
 chmod +x $PREFIX/bin/Tool
-echo "[*] command created"
-
+printf "${green} [*] command created : Tool ${noc}"
+echo ""
 sleep 1
-exit
+echo "sh /sdcard/python/codes/cls.sh" > $PREFIX/bin/cls
+chmod +x $PREFIX/bin/cls
+printf "${green} [*] command created : cls ${noc}"
+echo ""
+printf "${yellow}---------------------------------${noc}\n"
+sleep 2
+echo ""
+exit 0
